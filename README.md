@@ -1,2 +1,2 @@
-# HANU
-A auto trade analysis tool. 
+# HANUMAN
+An auto trade analysis tool. 
