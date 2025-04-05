@@ -1,0 +1,5 @@
+pandas
+requests
+kiteconnect
+matplotlib
+setuptools
