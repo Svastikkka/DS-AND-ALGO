@@ -1,2 +1,3 @@
-# HANUMAN
-An auto trade analysis tool. 
+# Udemy
+
+Courses I have covered so far.
