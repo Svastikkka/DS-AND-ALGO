@@ -9,8 +9,9 @@ DATA STRUCTURES
 1. BINARY SEARCH
 2. SORTING
 3. DOUBLY-LINKED LIST
+4. HashMap/Dictionary
 
-ALGORITHM
+ALGORITHMS
 1. BOYER-MOORE VOTING ALGORITHM
     - 169
 
@@ -33,12 +34,16 @@ Problems
 1. Two Sum.ipynb
 11. Container with most water.ipynb
 136. Single Number.ipynb
+169. Majority Element.ipynb
 204. Count Primes.ipynb
+217. Contains Duplicate.ipynb
 268. Missing Number.ipynb
 278. First Bad Version.ipynb
 283. Move Zeroes.ipynb
 3. Longest Substring Without Repeating Characters.ipynb
 34. Find First and Last Position of Element in Sorted Array.ipynb
+454. 4Sum II.ipynb
+49. Group Anagrams.ipynb
 657. Robot Return to Origin.ipynb
 67. Add Binary.ipynb
 881. Boats to Save People.ipynb
