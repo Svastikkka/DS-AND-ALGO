@@ -14,11 +14,11 @@
 10. Practice Tests - Node Affinity
 11. Practice Tests - Resource Limits                                                     DONE
 12. Practice Tests - Daemonsets
-12. Practice Tests - Static Pods                                                         DONE
-13. Practice Tests - Priority Classes
-14. Practice Tests - Multiple Schedulars
-15. Practice Tests - Admission Controller
-16. Practice Tests - Validating and Mutating Admission Controller
+13. Practice Tests - Static Pods                                                         DONE
+14. Practice Tests - Priority Classes
+15. Practice Tests - Multiple Schedulars
+16. Practice Tests - Admission Controller
+17. Practice Tests - Validating and Mutating Admission Controller
 
 ### Logging and Monitoring
 
@@ -65,31 +65,5 @@ Available Commands:
 2. Affinity (Pod (Affinity and AntiAffinity) and Node)
 3. Selectors
 
-# Installing Kubernetes
-
-Kubernetes Version: 1.33.0-1.1 
-Steps are as follows. Please do it on both master and worker nodes
-
-1. Install Prerequestes
-
-```bash 
-sudo apt-get update
-sudo apt-get install -y apt-transport-https ca-certificates curl
-```
-
-```bash
-curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.33/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
-```
-
-```bash
-echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.33/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
-sudo apt-get update
-```
-
-```bash
-sudo apt-cache madison kubeadm
-sudo apt-get install -y kubelet=1.33.0-1.1 kubeadm=1.33.0-1.1 kubectl=1.33.0-1.1
-sudo apt-mark hold kubelet kubeadm kubectl
-```
-
-# Initialize Control Plane Node (Master Node). Use the following options:
+# Need further practice
+- nodeAffinity
