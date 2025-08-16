@@ -16,6 +16,12 @@
 12. Practice Tests - Daemonsets
 12. Practice Tests - Static Pods                                                         DONE
 13. Practice Tests - Priority Classes
+14. Practice Tests - Multiple Schedulars
+15. Practice Tests - Admission Controller
+16. Practice Tests - Validating and Mutating Admission Controller
+
+### Logging and Monitoring
+
 
 
 ### Install kubernetes "the kubeadm way"

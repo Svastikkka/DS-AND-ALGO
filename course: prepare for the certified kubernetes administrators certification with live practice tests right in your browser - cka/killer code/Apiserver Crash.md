@@ -286,3 +286,16 @@ spec:
     name: usr-share-ca-certificates
 status: {}
 ```
+
+
+
+kubelet mis configuration fix
+
+To fix we remove the unknown flag in /var/lib/kubelet/kubeadm-flags.env :
+
+KUBELET_KUBEADM_ARGS="--container-runtime-endpoint=unix:///var/run/containerd/containerd.sock --pod-infra-container-image=registry.k8s.io/pause:3.9"
+
+
+service kubelet restart
+
+service kubelet status
