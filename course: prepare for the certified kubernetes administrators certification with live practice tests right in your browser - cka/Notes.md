@@ -1,20 +1,25 @@
 # Index
-1. Pods                                                     DONE
-2. Replicasets                                              DONE
-3. Deployments                                              DONE
-4. Namespaces                                               DONE
-5. Services                                                 DONE
-6. Imperative Commands (kubectl create/delete/top/run )     DONE
-7. Manual Scheduling                                        DONE
-8. Labels and Selectors
-9. Taints and Toleration
-10. Node Affinity
-11. Resource Limits                                         DONE
-12. Daemonsets
-12. Static Pods                                             DONE
-13. Priority Classes
+### Core Concept
+1. Practice Tests - Pods                                                                 DONE
+2. Practice Tests - Replicasets                                                          DONE
+3. Practice Tests - Deployments                                                          DONE
+4. Practice Tests - Namespaces                                                           DONE
+5. Practice Tests - Services                                                             DONE
+6. Practice Tests - Imperative Commands (kubectl create/delete/top/run )                 DONE
+
+### Scheduling
+7. Practice Tests - Manual Scheduling                                                    DONE
+8. Practice Tests - Labels and Selectors
+9. Practice Tests - Taints and Toleration
+10. Practice Tests - Node Affinity
+11. Practice Tests - Resource Limits                                                     DONE
+12. Practice Tests - Daemonsets
+12. Practice Tests - Static Pods                                                         DONE
+13. Practice Tests - Priority Classes
 
 
+### Install kubernetes "the kubeadm way"
+Practice Tests - Cluster installation using kubeadm
 
 
 # Important commands
@@ -54,6 +59,31 @@ Available Commands:
 2. Affinity (Pod (Affinity and AntiAffinity) and Node)
 3. Selectors
 
+# Installing Kubernetes
 
+Kubernetes Version: 1.33.0-1.1 
+Steps are as follows. Please do it on both master and worker nodes
 
+1. Install Prerequestes
 
+```bash 
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl
+```
+
+```bash
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.33/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+```
+
+```bash
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.33/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+```
+
+```bash
+sudo apt-cache madison kubeadm
+sudo apt-get install -y kubelet=1.33.0-1.1 kubeadm=1.33.0-1.1 kubectl=1.33.0-1.1
+sudo apt-mark hold kubelet kubeadm kubectl
+```
+
+# Initialize Control Plane Node (Master Node). Use the following options:
