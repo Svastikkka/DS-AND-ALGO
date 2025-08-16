@@ -67,3 +67,4 @@ Available Commands:
 
 # Need further practice
 - nodeAffinity
+- priorityClassName
