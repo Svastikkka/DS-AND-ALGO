@@ -9,13 +9,13 @@
 
 ### Scheduling
 7. Practice Tests - Manual Scheduling                                                    DONE
-8. Practice Tests - Labels and Selectors
-9. Practice Tests - Taints and Toleration
-10. Practice Tests - Node Affinity
+8. Practice Tests - Labels and Selectors                                                 DONE
+9. Practice Tests - Taints and Toleration                                                DONE
+10. Practice Tests - Node Affinity                                                       DONE
 11. Practice Tests - Resource Limits                                                     DONE
-12. Practice Tests - Daemonsets
+12. Practice Tests - Daemonsets                                                          DONE
 13. Practice Tests - Static Pods                                                         DONE
-14. Practice Tests - Priority Classes
+14. Practice Tests - Priority Classes                                                    DONE
 15. Practice Tests - Multiple Schedulars
 16. Practice Tests - Admission Controller
 17. Practice Tests - Validating and Mutating Admission Controller
