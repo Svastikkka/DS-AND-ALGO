@@ -104,6 +104,9 @@ Available Commands:
 - priorityClassName
 - Admission Controller and Kube API server
 - Validating and Mutating Admission Controllers 
+- init container
+- secret types
+- env vs envFrom
 
 
 # Reference
