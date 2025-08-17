@@ -16,12 +16,25 @@
 12. Practice Tests - Daemonsets                                                          DONE
 13. Practice Tests - Static Pods                                                         DONE
 14. Practice Tests - Priority Classes                                                    DONE
-15. Practice Tests - Multiple Schedulars
-16. Practice Tests - Admission Controller
-17. Practice Tests - Validating and Mutating Admission Controller
+15. Practice Tests - Multiple Schedulars                                                 DONE
+16. Practice Tests - Admission Controller                                                DONE
+17. Practice Tests - Validating and Mutating Admission Controller                        DONE
 
 ### Logging and Monitoring
+18. Practice Test - Monitor Cluster Components
+19. Practice Test - Managing Application Logs
 
+### Application Life Cycle Management
+20. Practice Test - Rolling Updates and Rollbacks
+21. Practice Test - Commands and Arguments
+22. Practice Test - Env Variables
+23. Practice Test - Secrets
+24. Practice Test - Multi Container PODs
+25. Practice Test - Init Containers
+26. Practice Test - Manual Scaling
+27. Practice Test - HPA
+28. Practice Test - Install VPA
+29. Practice Test - Modifying CPU resources in VPA
 
 
 ### Install kubernetes "the kubeadm way"
@@ -38,6 +51,27 @@ Practice Tests - Cluster installation using kubeadm
     - kubectl create priorityclass high-priority --value=100000 --description="High priority" --global-default=false --dry-run=client -o yaml
 
     
+- Suppose the exam gives you three clusters and ask to perform task in cluster2:
+    - cluster1
+    - cluster2
+    - cluster3
+```bash
+kubectl config use-context cluster2
+```
+- Always double-check your current context
+```bash
+kubectl config current-context
+```
+- List down all context 
+```bash
+kubectl config get-contexts
+kubectl config get-contexts -o name
+```
+
+- Deployment Strategy in kubernetes
+  - Rolling Update
+  - Recreate
+  
 
 - kubectl create
 
@@ -68,3 +102,9 @@ Available Commands:
 # Need further practice
 - nodeAffinity
 - priorityClassName
+- Admission Controller and Kube API server
+- Validating and Mutating Admission Controllers 
+
+
+# Reference
+- [Installing kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
