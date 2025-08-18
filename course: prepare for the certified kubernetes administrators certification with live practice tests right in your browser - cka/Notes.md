@@ -35,7 +35,9 @@
 27. Practice Test - HPA
 28. Practice Test - Install VPA
 29. Practice Test - Modifying CPU resources in VPA
-
+30. Practice Test - HPA
+31. Practice Test - Install VPA
+32. Practice Test - Modifying CPU resources in VPA
 
 ### Install kubernetes "the kubeadm way"
 Practice Tests - Cluster installation using kubeadm
@@ -94,6 +96,7 @@ Available Commands:
   - serviceaccount        Create a service account with the specified name
   - token                 Request a service account token
 
+- kubectl scale
 
 1. Structure of manifest
 2. Affinity (Pod (Affinity and AntiAffinity) and Node)
@@ -104,10 +107,9 @@ Available Commands:
 - priorityClassName
 - Admission Controller and Kube API server
 - Validating and Mutating Admission Controllers 
-- init container
 - secret types
 - env vs envFrom
-
+- hpa
 
 # Reference
 - [Installing kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
