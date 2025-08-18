@@ -21,12 +21,12 @@
 17. Practice Tests - Validating and Mutating Admission Controller                        DONE
 
 ### Logging and Monitoring
-18. Practice Test - Monitor Cluster Components
-19. Practice Test - Managing Application Logs
+18. Practice Test - Monitor Cluster Components                                           DONE
+19. Practice Test - Managing Application Logs                                            DONE
 
 ### Application Life Cycle Management
-20. Practice Test - Rolling Updates and Rollbacks
-21. Practice Test - Commands and Arguments
+20. Practice Test - Rolling Updates and Rollbacks                                        DONE
+21. Practice Test - Commands and Arguments                                               DONE
 22. Practice Test - Env Variables
 23. Practice Test - Secrets
 24. Practice Test - Multi Container PODs
@@ -38,6 +38,16 @@
 30. Practice Test - HPA
 31. Practice Test - Install VPA
 32. Practice Test - Modifying CPU resources in VPA
+
+### Cluster Maintenance
+33. Practice Test - OS Upgrades
+34. Practice Test - Cluster Upgrade Process
+35. Practice Test - Backup and Restore Methods
+
+### Security
+36. Practice Test - View Certificate Details
+37. Practice Test - Certificates API
+
 
 ### Install kubernetes "the kubeadm way"
 Practice Tests - Cluster installation using kubeadm
