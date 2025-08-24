@@ -27,17 +27,14 @@
 ### Application Life Cycle Management
 20. Practice Test - Rolling Updates and Rollbacks                                        DONE
 21. Practice Test - Commands and Arguments                                               DONE
-22. Practice Test - Env Variables
-23. Practice Test - Secrets
+22. Practice Test - Env Variables                                                        DONE
+23. Practice Test - Secrets                                                              DONE
 24. Practice Test - Multi Container PODs
 25. Practice Test - Init Containers
 26. Practice Test - Manual Scaling
 27. Practice Test - HPA
 28. Practice Test - Install VPA
 29. Practice Test - Modifying CPU resources in VPA
-30. Practice Test - HPA
-31. Practice Test - Install VPA
-32. Practice Test - Modifying CPU resources in VPA
 
 ### Cluster Maintenance
 33. Practice Test - OS Upgrades
@@ -47,6 +44,15 @@
 ### Security
 36. Practice Test - View Certificate Details
 37. Practice Test - Certificates API
+38. Practice Test - KubeConfig
+39. Practice Test - Role Based Access Controls
+40. Practice Test - Cluster Roles
+41. Practice Test - Service Accounts
+42. Practice Test - Image Security
+43. Practice Test - Security Contexts
+44. Practice Test - Network Policies
+45. Practice Test - Custom Resource Definition
+
 
 
 ### Install kubernetes "the kubeadm way"
@@ -54,6 +60,10 @@ Practice Tests - Cluster installation using kubeadm
 
 
 # Important commands
+- kubectl api-resources
+
+
+
 
 - Imperative Commands
     - kubectl run nginx --image=nginx
@@ -62,27 +72,8 @@ Practice Tests - Cluster installation using kubeadm
     - kubectl explain
     - kubectl create priorityclass high-priority --value=100000 --description="High priority" --global-default=false --dry-run=client -o yaml
 
-    
-- Suppose the exam gives you three clusters and ask to perform task in cluster2:
-    - cluster1
-    - cluster2
-    - cluster3
-```bash
-kubectl config use-context cluster2
-```
-- Always double-check your current context
-```bash
-kubectl config current-context
-```
-- List down all context 
-```bash
-kubectl config get-contexts
-kubectl config get-contexts -o name
-```
 
-- Deployment Strategy in kubernetes
-  - Rolling Update
-  - Recreate
+### Ad Hoc Commands
   
 
 - kubectl create
@@ -93,9 +84,11 @@ Available Commands:
   - configmap             Create a config map from a local file, directory or literal value
   - cronjob               Create a cron job with the specified name
   - deployment            Create a deployment with the specified name
+    - `kubectl create deploy manshu-deploy --image=nginx`
   - ingress               Create an ingress with the specified name
   - job                   Create a job with the specified name
   - namespace             Create a namespace with the specified name
+    - `kubectl create ns manshu-namespace`
   - poddisruptionbudget   Create a pod disruption budget with the specified name
   - priorityclass         Create a priority class with the specified name
   - quota                 Create a quota with the specified name
@@ -106,22 +99,54 @@ Available Commands:
   - serviceaccount        Create a service account with the specified name
   - token                 Request a service account token
 
+- kubectl expose
+- kubectl run
+- kubectl set
+- kubectl explain
+- kubectl get
+- kubectl edit
+- kubectl delete
+- kubectl rollout
 - kubectl scale
+- kubectl autoscale
+- kubectl certificate
+- kubectl cluster-info
+  - `kubectl cluster-info`
+- kubectl top
+  - `kubectl top po`
+- kubectl cordon
+  - `kubectl cordon NODE01`
+- kubectl uncordon
+  - `kubectl uncordon NODE01`
+- kubectl drain
+  - `kubectl drain NODE01`
+- kubectl taint
 
-1. Structure of manifest
-2. Affinity (Pod (Affinity and AntiAffinity) and Node)
-3. Selectors
+
+- kubectl config
+  - `kubectl config get-contexts` // list all context
+  - `kubectl config get-contexts -o name` // list all context
+  - `kubectl config current-context` // current contect
+  - `kubectl config use-context cluster2` // to switch from one cluster to another
+
+
+
+
+### Deployment Strategy in kubernetes
+  - Rolling Update
+  - Recreate
 
 # Need further practice
-- nodeAffinity
-- priorityClassName
-- Admission Controller and Kube API server
-- Validating and Mutating Admission Controllers 
-- 23. Practice Test - Secrets (secret types)
-- 22. Practice Test - Env Variables (env vs envFrom)
-- 30. Practice Test - HPA
-- 34. Practice Test - Cluster Upgrade Process
-- 35. Practice Test - Backup and Restore Methods
+10. Practice Tests - Node Affinity  
+14. Practice Tests - Priority Classes
+16. Practice Tests - Admission Controller
+17. Practice Tests - Validating and Mutating Admission Controller
+23. Practice Test - Secrets (secret types)
+22. Practice Test - Env Variables (env vs envFrom)
+30. Practice Test - HPA
+34. Practice Test - Cluster Upgrade Process
+35. Practice Test - Backup and Restore Methods
+39. Practice Test - Role Based Access Controls
 
 
 # Reference
