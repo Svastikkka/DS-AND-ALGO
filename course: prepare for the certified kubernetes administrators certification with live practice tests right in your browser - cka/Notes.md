@@ -95,6 +95,8 @@ Practice Tests - Cluster installation using kubeadm
 - kubectl rollout
 - kubectl scale
 - kubectl autoscale
+  - `kubectl autoscale deployment foo  --min=2 --max=10 --cpu-percent=80 -o yaml --dry-run=client`
+  - `kubectl autoscale rc foo  --min=2 --max=10 --cpu-percent=80 -o yaml --dry-run=client`
 - kubectl certificate
 - kubectl cluster-info
   - `kubectl cluster-info`
