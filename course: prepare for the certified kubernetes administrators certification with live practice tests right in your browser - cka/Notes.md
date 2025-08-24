@@ -29,12 +29,12 @@
 21. Practice Test - Commands and Arguments                                               DONE
 22. Practice Test - Env Variables                                                        DONE
 23. Practice Test - Secrets                                                              DONE
-24. Practice Test - Multi Container PODs
-25. Practice Test - Init Containers
-26. Practice Test - Manual Scaling
-27. Practice Test - HPA
-28. Practice Test - Install VPA
-29. Practice Test - Modifying CPU resources in VPA
+24. Practice Test - Multi Container PODs                                                 DONE
+25. Practice Test - Init Containers                                                      DONE
+26. Practice Test - Manual Scaling                                                       DONE
+27. Practice Test - HPA                                                                  DONE
+28. Practice Test - Install VPA                                                          DONE
+29. Practice Test - Modifying CPU resources in VPA                                       DONE
 
 ### Cluster Maintenance
 33. Practice Test - OS Upgrades
@@ -80,6 +80,7 @@ Practice Tests - Cluster installation using kubeadm
     - role                  Create a role with single rule
     - rolebinding           Create a role binding for a particular role or cluster role
     - secret                Create a secret using a specified subcommand
+      - `kubectl create secret docker-registry my-regcred --docker-server=<your-registry-server> --docker-username=<your-username> --docker-password=<your-password> --docker-email=<your-email>`
     - service               Create a service using a specified subcommand
     - serviceaccount        Create a service account with the specified name
     - token                 Request a service account token
