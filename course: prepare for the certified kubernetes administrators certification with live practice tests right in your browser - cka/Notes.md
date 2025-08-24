@@ -66,10 +66,7 @@ Practice Tests - Cluster installation using kubeadm
 
 
 - Imperative Commands
-    - kubectl run nginx --image=nginx
-    - kubectl delete
-    - kubectl create
-    - kubectl explain
+
     - kubectl create priorityclass high-priority --value=100000 --description="High priority" --global-default=false --dry-run=client -o yaml
 
 
@@ -90,6 +87,7 @@ Practice Tests - Cluster installation using kubeadm
       - `kubectl create ns manshu-namespace`
     - poddisruptionbudget   Create a pod disruption budget with the specified name
     - priorityclass         Create a priority class with the specified name
+      - `kubectl create priorityclass custom-high-priority --value=100000 --description="High priority" --global-default=false --dry-run=client -o yaml`
     - quota                 Create a quota with the specified name
     - role                  Create a role with single rule
     - rolebinding           Create a role binding for a particular role or cluster role
@@ -100,6 +98,7 @@ Practice Tests - Cluster installation using kubeadm
 
 - kubectl expose
 - kubectl run
+  - `kubectl run nginx --image=nginx`
 - kubectl set
 - kubectl explain
 - kubectl get
