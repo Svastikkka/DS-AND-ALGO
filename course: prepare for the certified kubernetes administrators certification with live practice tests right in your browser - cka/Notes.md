@@ -117,9 +117,12 @@ Available Commands:
 - priorityClassName
 - Admission Controller and Kube API server
 - Validating and Mutating Admission Controllers 
-- secret types
-- env vs envFrom
-- hpa
+- 23. Practice Test - Secrets (secret types)
+- 22. Practice Test - Env Variables (env vs envFrom)
+- 30. Practice Test - HPA
+- 34. Practice Test - Cluster Upgrade Process
+- 35. Practice Test - Backup and Restore Methods
+
 
 # Reference
 - [Installing kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
