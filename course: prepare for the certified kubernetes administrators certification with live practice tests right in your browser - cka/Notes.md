@@ -58,18 +58,6 @@
 ### Install kubernetes "the kubeadm way"
 Practice Tests - Cluster installation using kubeadm
 
-
-# Important commands
-- kubectl api-resources
-
-
-
-
-- Imperative Commands
-
-    - kubectl create priorityclass high-priority --value=100000 --description="High priority" --global-default=false --dry-run=client -o yaml
-
-
 ### Ad Hoc Commands
   
 
@@ -120,7 +108,7 @@ Practice Tests - Cluster installation using kubeadm
   - `kubectl drain NODE01`
 - kubectl taint
 
-
+- kubectl api-resources
 - kubectl config
   - `kubectl config get-contexts` // list all context
   - `kubectl config get-contexts -o name` // list all context
