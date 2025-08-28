@@ -53,7 +53,11 @@
 44. Practice Test - Network Policies
 45. Practice Test - Custom Resource Definition
 
+### Storage
+46. Practice Test - Persistent Volume Claims
+47. Practice Test - Storage Class
 
+### Network
 
 ### Install kubernetes "the kubeadm way"
 Practice Tests - Cluster installation using kubeadm
@@ -136,7 +140,12 @@ Practice Tests - Cluster installation using kubeadm
 34. Practice Test - Cluster Upgrade Process
 35. Practice Test - Backup and Restore Methods
 39. Practice Test - Role Based Access Controls
-
+44. Practice Test - Network Policies
+45. Practice Test - Custom Resource Definition
+46. Practice Test - Persistent Volume Claims
+47. Practice Test - Storage Class
 
 # Reference
 - [Installing kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
+- [2025 Real CKA Exam Questions - New Pattern](https://www.udemy.com/course/real-cka-exam-questions-certified-kubernetes-administrator/?couponCode=PMNVD2025)
+- [](https://www.youtube.com/watch?v=eGv6iPWQKyo)
