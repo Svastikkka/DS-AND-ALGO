@@ -1,184 +1,165 @@
-Create a new pod with the nginx image.
-Create a new pod by creating manifest file
-how many endpoint attach to svc
+1. Create a `ClusterRole` named `pod-reader` that allows users to perform `get`, `list`, and `watch` operations on `pods`
+2. Create a `ClusterRole` named `pod-reader` that only allows the `get` action on pods named `readablepod` and `anotherpod`.
+3. Create a `ClusterRole` named `foo` that allows `get`, `list`, and `watch` operations on `replicasets` from the `apps` API group.
+4. Create a `ClusterRole` named `foo` that allows `get`, `list`, and `watch` operations on `pods` and their `status` subresource.
+5. Create a `ClusterRole` named `foo` that allows the `get` action on `non-resource URLs` under /logs/*.
+6. Create a `ClusterRole` named `monitoring` that uses an aggregation rule with the label `rbac.example.com/aggregate-to-monitoring=true`.
+7. Create a `ClusterRoleBinding` named `read-pods-binding` that binds the `pod-reader` `ClusterRole` to the user `alice`.
+8. Create a `ClusterRoleBinding` named `multi-user-admin` that binds the `cluster-admin` `ClusterRole` to the users `bob` and `charlie`.
+9. Create a `ClusterRoleBinding` named `qa-access` that binds the `edit` `ClusterRole` to users `qa1`, `qa2`, and the group `qa-team`.
+10. Create a `ClusterRoleBinding` named `sa-monitoring` that binds the `view` `ClusterRole` to the `ServiceAccount` `monitor` in the `monitoring` namespace.
+11. Create a `ConfigMap` named `my-config` from all the files inside the directory `/path/to/bar`.
+12. Create a `ConfigMap` named `my-config` with custom keys `key1` and `key2` from files `/path/to/bar/file1.txt` and `/path/to/bar/file2.txt`
+13. Create a `ConfigMap` named `my-config` with two literal values: `key1=config1` and `key2=config2`.
+14. Create a `ConfigMap` named `my-config` from `key-value` pairs defined in the files inside `/path/to/bar`
+15. Create a `ConfigMap` named `my-config` using environment variable definitions from the files `/path/to/foo.env` and `/path/to/bar.env`.
+16. Create a `CronJob` named `my-job` schedule at `*/1 * * * *` with image `busybox`
+17. Create a `CronJob` named `my-job` schedule at `*/1 * * * *` with image `busybox` with a command `date`
+18. Create a `Deployment` named `testing` using the image `nginx`.
+19. Create a `Deployment` named `testing` using the image `nginx` and configure it to run the command `sleep 1000`.
+20. Create a `Deployment` named `testing` using the image `nginx` with `3` replicas.
+21. Create a `Deployment` named `testing` using the image `nginx` and expose port `80`
+22. Create a `Deployment` named `testing` that uses multiple images: `busybox:latest`, `ubuntu:latest`, and `nginx`
+23. Create a single `Ingress` called `simple` that directs requests to `foo.com/bar` to the service `svc1:8080` with TLS enabled using secret `my-cert`.
+24. Create a catch-all `Ingress` called `catch-all` that forwards traffic from `/path` to the service `svc1:8080`, and specify the Ingress Class as `otheringress`
+25. Create an `Ingress` called `annotated` with Ingress Class `default`, routing traffic from `foo.com/bar` to `svc1:8080`, and add two annotations: `ingress.annotation1=foo` and `ingress.annotation2=bla`.
+26. Create an `Ingress` called `multipath` with the same host `foo.com` but multiple paths: `/` to `svc1:8080` and `/admin/` to `svcadmin:8081` with ingress class name `default`
+27. Create an `Ingress` called `ingress1` with multiple hosts: `foo.com/path*` forwarding to `svc:8080` and `bar.com/admin*` forwarding to `svc2:http`. Use pathType Prefix.
+28. Create an `Ingress` called `ingtls` with Ingress Class `default`, TLS enabled using the `default` certificate, and two rules: `foo.com/` to `svc:8080` and `foo.com/path/subpath*` to `othersvc:8080`.
+29. Create an `Ingress` called `ingsecret` with TLS enabled using secret `secret1`, host `foo.com/*` forwarding to `svc:8080`, and pathType `Prefix`.
+30. Create an `Ingress` called `ingdefault` with a default backend `defaultsvc:http`, TLS enabled using `secret1`, and an additional rule forwarding `foo.com/*` to `svc:8080`.
 
 
-Pods
-ReplicaSet
+kubectl create ingress ingdefault --default-backend=defaultsvc:http  --rule="foo.com/*=svc:8080,tls=secret1"
+kubectl create ingress ingdefault --default-backend=defaultsvc:http  --rule="foo.com/*=svc:8080,tls=secret1"
+
+kubectl create ingress ingsecret --rule="foo.com/*=svc:8080,tls=secret1"
+
+kubectl create ingress ingtls --class=default --rule="foo.com/=svc:8080,tls=default" --rule="foo.com/path/subpath*=othersvc:8080,tls=default"
+
+kubectl create ingress ingress1 --class=default --rule="foo.com/path*=svc:8080" --rule="bar.com/admin*=svc2:8081"
+kubectl create ingress ingress1 --class=default --rule="foo.com/path*=svc:8080" --rule="bar.com/admin*=svc2:8081"
+kubectl create ingress ingress1 --class=default --rule="foo.com/path*=svc:8080" --rule="bar.com/admin*=svc2:8081"
+kubectl create ingress ingress1 --class=default --rule="foo.com/path*=svc:8080" --rule="bar.com/admin*=svc2:8081"
+kubectl create ingress ingress1 --class=default --rule="foo.com/path*=svc:8080" --rule="bar.com/admin*=svc2:8081"
+
+kubectl create ingress multipath --class=default --rule="foo.com/=svc1:8080" --rule="foo.com/admin/=svcadmin:8081"
+kubectl create ingress multipath --class=default --rule="foo.com/=svc1=8080" --rule="foo.com/admin/=svcadmin:8081"
+kubectl create ingress multipath --class=default --rule="foo.com/=svc1=8080" --rule="foo.com/admin/=svcadmin:8081"
+kubectl create ingress multipath --class=default --rule="foo.com/=svc1=8080" --rule="foo.com/admin/=svcadmin:8081"
+kubectl create ingress multipath --class=default --rule="foo.com/=svc1=8080" --rule="foo.com/admin/=svcadmin:8081"
+
+kubectl create ingress annotated --class=default --rule="foo.com/bar=svc1:8080" --annotation ingress.annotation1=foo --annotation ingress.annotation2=bla
+kubectl create ingress anootated --class=default --rule="foo.com/bar=svc1:8080" --annotation ingress.annotation1=foo --annotation ingress.annotation2=bla
+kubectl create ingress annotated --class=default --rule="foo.com/bar=svc1:8080" --annotation ingress.annotation1=foo --annotation ingress.annotation2=bla
+kubectl create ingress annotated --class=default --rule="foo.com/bar=svc1:8080" --annotation ingress.annotation1=foo --annotation ingress.annotation2=bla
+kubectl create ingress annotated --class=default --rule="foo.com/bar=svc1:8080" --annotation ingress.annotation1=foo --annotation ingress.annotation2=bla
+
+kubectl create ingress catch-all --class=otheringress --rule="/path=svc1:8080"
+kubectl create ingress catch-all --class=otheringress --rule="/path=svc1:8080"
+kubectl create ingress catch-all --class=otheringress --rule="/path=svc1:8080"
+kubectl create ingress catch-all --class=otheringress --rule="/path=svc1:8080"
+kubectl create ingress catch-all --class=otheringress --rule="/path=svc1:8080"
+
+kubectl create ingress simple --rule="foo.com/bar=svc1:8080,tls=my-cert"
+kubectl create ingress simple --rule="foo.com/bar=svc1:8080,tls=my-cert"
+kubectl create ingress simple --rule="foo.com/bar=svc1:8080,tls=my-cert"
+kubectl create ingress simple --rule="foo.com/bar=svc1:8080,tls=my-cert"
+kubectl create ingress simple --rule="foo.com/bar=svc1:8080,tls=my-cert"
+
+kubectl create deploy testing --image=busybox:latest --image=ubuntu:latest --image=nginx
+
+kubectl create deploy testing --image=nginx --port=80
+
+kubectl create deploy testing --image=nginx --replicas=3
+
+kubectl create deploy testing --image=nginx -- sleep 1000
+
+kubectl create deploy testing --image=nginx
+
+kubectl create cronjob my-job --schedule="*/1 * * * *" --image=busybox -- date
+
+kubectl create cronjob my-job --schedule="*/1 * * * *" --image=busybox
+kubectl create cronjob my-job --schedule="*/1 * * * *" --image=busybox
+kubectl create cronjob my-job --schedule="*/1 * * * *" --image=busybox
+kubectl create cronjob my-job --schedule="*/1 * * * *" --image=busybox
+kubectl create cronjob my-job --schedule="*/1 * * * *" --image=busybox
+
+kubectl create configmap my-config --from-env-file=/path/to/foo.env --from-env-file=/path/to/bar.env
+kubectl create configmap my-config --from-env-file=/path/to/foo.env --from-env-file=/path/to/bar.env
+kubectl create configmap my-config --from-env-file=/path/to/foo.env --from-env-file=/path/to/bar.env
+kubectl create configmap my-config --from-env-file=/path/to/foo.env --from-env-file=/path/to/bar.env
+kubectl create configmap my-config --from-env-file=/path/to/foo.env --from-env-file=/path/to/bar.env
+
+kubectl create configmap my-config --from-file=key1=/path/to/bar
+kubectl create configmap my-config --from-file=key1=/path/to/bar
+kubectl create configmap my-config --from-file=key1=/path/to/bar
+kubectl create configmap my-config --from-file=key1=/path/to/bar
+kubectl create configmap my-config --from-file=key1=/path/to/bar
+
+kubectl create configmap my-config --from-literal=key1=config1 --from-literal=key2=config2
+kubectl create configmap my-config --from-literal=key1=config1 --from-literal=key2=config2
+kubectl create configmap my-config --from-literal=key1=config1 --from-literal=key2=config2
+kubectl create configmap my-config --from-literal=key1=config1 --from-literal=key2=config2
+kubectl create configmap my-config --from-literal=key1=config1 --from-literal=key2=config2
+
+kubectl create configmap my-config --from-file=key1=/path/to/bar/file1.txt --from-file=key2=/path/to/bar/file2.txt
+kubectl create configmap my-config --from-file=key1=/path/to/bar/file1.txt --from-file=key2=/path/to/bar/file2.txt
+kubectl create configmap my-config --from-file=key1=/path/to/bar/file1.txt --from-file=key2=/path/to/bar/file2.txt
+kubectl create configmap my-config --from-file=key1=/path/to/bar/file1.txt --from-file=key2=/path/to/bar/file2.txt
+kubectl create configmap my-config --from-file=key1=/path/to/bar/file1.txt --from-file=key2=/path/to/bar/file2.txt
 
 
+kubectl create configmap my-config --from-file=/path/to/bar
+kubectl create configmap my-config --from-file=/path/to/bar
+kubectl create configmap my-config --from-file=/path/to/bar
+kubectl create configmap my-config --from-file=/path/to/bar
+kubectl create configmap my-config --from-file=/path/to/bar
+
+kubectl create clusterrolebinding sa-monitoring --cluster-role=view --serviceaccount=monitoring:monitor
+
+kubectl create clusterrolebinding qa-access --clusterrole=edit --user=qa1 --user=qa2 --group=qa-team
+
+kubectl create clusterrolebinding multi-user-admin --clusterrole=cluster-admin --user=bob --user=charlie
+
+kubectl create clusterrolebinding read-pods-binding --clusterrole=pod-reader --user=alice
+kubectl create clusterrolebinding read-pods-binding --clusterrole=pod-reader --user=alice
+kubectl create clusterrolebinding read-pods-binding --clusterrole=pod-reader --user=alice
+kubectl create clusterrolebinding read-pods-binding --clusterrole=pod-reader --user=alice
+kubectl create clusterrolebinding read-pods-binding --clueterrole=pod-reader --user=alice
+
+kubectl create clusterrole monitoring --aggregation-rule="rbac.example.com/aggregate-to-monitoring=true"
+kubectl create clusterrole monitoring --aggregation-rule="rbac.example.com/aggregate-to-monitoring=true"
+kubectl create clusterrole monitoring --aggregation-rule="rbac.example.com/aggregate-to-monitoring=true"
+kubectl create clusterrole monitoring --aggregation-rule="rbac.example.com/aggregate-to-monitoring=true"
+kubectl create clusterrole monitoring --aggregation-rule="rbac.example.com/aggregate-to-monitoring=true"
 
 
+kubectl create clusterrole foo --verb=get --non-resource-url=/logs/*
+kubectl create clusterrole foo --verb=get --non-resource-url=/logs/*
+kubectl create clusterrole foo --verb=get --non-resource-url=/logs/*
+kubectl create clusterrole foo --verb=get --non-resource-url=/logs/*
+kubectl create clusterrole foo --verb=get --non-resource-url=/logs/*
 
-Get status of kubernetes composnents 
- kubectl get componentstatuses
+kubectl create clusterrole foo --verb=get,list,watch --resources=pods,pods/status
+kubectl create clusterrole foo --verb=get,list,watch --resources=pods,pods/status
+kubectl create clusterrole foo --verb=get.list.watch --resources=pods,pods/ststus
+kubectl create clusterrole foo --verb=get,list,watch --resources=pods,pods/status
+kubectl create clusterrole foo --verb=get,list,watch --resources=pods,pods/status
 
-cluster info
- kubectl cluster-info
+kubectl create clusterrole foo --verb=get,list,watch --resources=replicasets.apps
+kubectl create clusterrole foo --verb=get,list,watch --resources=replicasets.apps
+kubectl create clusterrole foo --verb=get,list,watch --resources=replicasets.apps
+kubectl create clusterrole foo --verb=get,list,watch --resources=replicasets.apps
+kubectl create clusterrole foo --verb=get,list,watch --resources=replicasets.apps
 
+kubectl create clusterrole pod-reader --verb=get --resource-name=readablepod --resource-name=anotherpod
+kubectl create clusterrole pod-reader --verb=get --resource-name=readablepod --resource-name=anotherpod
+kubectl create clusterrole pod-reader --verb=get --resource-name=readablepod --resource-name=anotherpod
+kubectl create clusterrole pod-reader --verb=get --resource-name=readablepod --resource-name=anotherpod
 
-Manually schedule the pod on node01. Delete and recreate the POD if necessary.
-```
-apiVersion: v1
-kind: Pod
-metadata:
-  name: manual-pod
-spec:
-  containers:
-    - name: nginx
-      image: nginx
-  nodeName: node01
-
-```
-
-
-kubectl get all
-
-
-
-Create a taint on node01 with key of spray, value of mortein and effect of NoSchedule
-```
-kubectl taint node node01 spray=mortein:NoSchedule
-```
-
-
-```
-apiVersion: v1
-kind: Pod
-metadata:
-  name: bee
-spec:
-  containers:
-  - name: nginx
-    image: nginx
-  tolerations:
-  - key: "spray"
-    operator: "Equal"
-    value: "mortein"
-    effect: "NoSchedule"
-```
-
-Remove the taint on controlplane, which currently has the taint effect of NoSchedule.
-
-kubectl taint node controlplane node-role.kubernetes.io/control-plane:NoSchedule-
-
-
-To learn spec of pod
-```
-kubectl explain pod.spec
-kubectl explain pod.spec.tolerations
-
-```
-
-Apply a label color=blue to node node01
-
-kubectl label nodes node01 color=blue
-
-
-Set Node Affinity to the deployment to place the pods on node01 only.
-
-kubectl explain deploy.spec.template.spec | grep -A10 affinity
-
-
-
-Create a new deployment named red with the nginx image and 2 replicas, and ensure it gets placed on the controlplane node only.Use the label key - node-role.kubernetes.io/control-plane - which is already set on the controlplane node.
-
-```
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: red
-spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: red
-  template:
-    metadata:
-      labels:
-        app: red
-    spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
-                operator: Exists
-      containers:
-      - name: nginx
-        image: nginx
-```
-
-
-Deploy a DaemonSet for FluentD Logging.Use the given specifications.
-```yaml
-apiVersion: apps/v1
-kind: DaemonSet
-metadata:
-    name: elasticsearch
-spec:
-    selector:
-        matchLabels:
-            name: elasticsearch
-    template:
-        metadata:
-            labels:
-                name: elasticsearch
-        spec:
-            containers:
-                - name: elasticsearch
-                  image: registry.k8s.io/fluentd-elasticsearch:1.20
-
-```
-
-
-What is the path of the directory holding the static pod definition files?
-Ans. /etc/kubernetes/manifests
-
-
-Create a static pod named static-busybox that uses the busybox image , run in the default namespace and the command sleep 1000
-
-```bash
-kubectl run --restart=Never --image=busybox:1.28.4 static-busybox --dry-run=client -o yaml --command -- sleep 1000 > /etc/kubernetes/manifests/static-busybox.yaml
-```
-
-Edit the image on the static pod you created in the previous task to use busybox:1.28.4
-```bash
-kubectl run --restart=Never --image=busybox:1.28.4 static-busybox --dry-run=client -o yaml --command -- sleep 1000 > /etc/kubernetes/manifests/static-busybox.yaml
-
-```
-
-We just created a new static pod named static-greenbox. Find it and delete it. (Important)
-
-1. First, let's identify the node in which the pod called static-greenbox is created. To do this, run:
-```bash
-root@controlplane:~# kubectl get pods --all-namespaces -o wide  | grep static-greenbox
-default       static-greenbox-node01                 1/1     Running   0          19s     10.244.1.2   node01       <none>           <none>
-```
-
-2. From the result of this command, we can see that the pod is running on node01.
-
-3. Next, SSH to node01 and identify the path configured for static pods in this node.
-
-**Important**: The path need not be /etc/kubernetes/manifests. Make sure to check the path configured in the kubelet configuration file.
-
-```bash
-root@controlplane:~# ssh node01 
-root@node01:~# ps -ef |  grep /usr/bin/kubelet 
-root        4147       1  0 14:05 ?        00:00:00 /usr/bin/kubelet --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf --config=/var/lib/kubelet/config.yaml --container-runtime-endpoint=unix:///var/run/containerd/containerd.sock --pod-infra-container-image=registry.k8s.io/pause:3.9
-root        4773    4733  0 14:05 pts/0    00:00:00 grep /usr/bin/kubelet
-root@node01:~# grep -i staticpod /var/lib/kubelet/config.yaml
-staticPodPath: /etc/just-to-mess-with-you
-root@node01:~# 
-```
-
-4. Here the staticPodPath is /etc/just-to-mess-with-you
-
-```bash
-root@node01:/etc/just-to-mess-with-you# ls
-greenbox.yaml
-root@node01:/etc/just-to-mess-with-you# rm -rf greenbox.yaml 
-root@controlplane:~# kubectl get pods --all-namespaces -o wide  | grep static-greenbox
-root@controlplane:~# 
-```
+kubectl create clusterrole pod-reader --verb=get,list,watch --resource=pods
+kubectl create clusterrole pod-reader --verb=get,list,watch --resource=pods
+kubectl create clusterrole pod-reader --verb=get,list,watch --resource=pods
+kubectl create clusterrole pod-reader --verb=get,list,watch --resource=pods
+kubectl create clusterrole pod-reader --verb=get,list,watch --resource=pods
