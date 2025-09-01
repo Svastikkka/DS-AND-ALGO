@@ -251,6 +251,7 @@ Practice Tests - Cluster installation using kubeadm
 - `kubeadm token create --print-join-command`
 - `kubectl version`
 - `kubeadm version`
+- 
 
 # Commands
 - `ip route show`: shows routes and gateway
