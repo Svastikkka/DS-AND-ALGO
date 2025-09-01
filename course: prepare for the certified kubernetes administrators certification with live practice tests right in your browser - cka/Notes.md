@@ -117,7 +117,9 @@ Practice Tests - Cluster installation using kubeadm
     - poddisruptionbudget   Create a pod disruption budget with the specified name
 
     - priorityclass         Create a priority class with the specified name
-      - `kubectl create priorityclass testing --value=100000 --description="High priority" --global-default=false`
+      - Create a priority class named high-priority: `kubectl create priorityclass testing --value=100000 --description="High priority" --global-default=false`
+      - Create a priority class named default-priority that is considered as the global default priority: `kubectl create priorityclass default-priority --value=1000 --global-default=true --description="default priority"`
+      - Create a priority class named high-priority that cannot preempt pods with lower priority: `kubectl create priorityclass high-priority --value=1000 --description="high priority" --preemption-policy="Never"`
 
     - quota                 Create a quota with the specified name
 
@@ -129,6 +131,14 @@ Practice Tests - Cluster installation using kubeadm
       - `kubectl create secret docker-registry testing --docker-server=<your-registry-server> --docker-username=<your-username> --docker-password=<your-password> --docker-email=<your-email>`
 
     - service               Create a service using a specified subcommand
+      - Available Commands:
+        - clusterip      Create a ClusterIP service
+          - Create a new ClusterIP service named my-cs: `kubectl create svc clusterip my-cs --tcp=5678:8080`
+          - Create a new ClusterIP service named my-cs (in headless mode): `kubectl create svc clusterip my-cs --clusterip="None"`
+
+        - externalname   Create an ExternalName service
+        - loadbalancer   Create a LoadBalancer service
+        - nodeport       Create a NodePort service
 
     - serviceaccount        Create a service account with the specified name
 
@@ -195,7 +205,18 @@ Practice Tests - Cluster installation using kubeadm
   - `kubectl config get-contexts -o name` // list all context
   - `kubectl config current-context` // current contect
   - `kubectl config use-context cluster2` // to switch from one cluster to another
+  - `kubectl --kube-config /opt/course/1/kubeconfig `
 
+
+- helm 
+  - helm search repo <keyword>
+  - helm repo list
+  - helm install minio 
+  - helm install my-nginx bitnami/nginx 
+  - helm repo add bitnami https://charts.bitnami.com/bitnami
+
+- kustomize
+  - kubectl kustomiz <DIR>
 
 
 - What is --aggregation-rule
@@ -208,27 +229,38 @@ Practice Tests - Cluster installation using kubeadm
   - These are endpoints like /healthz, /metrics, /logs/*, etc.
   - Useful when you want to give monitoring or debugging access without touching resources.
 - What is --default-backend
-- List down all the service deployed as service in node `systemctl list-units --type=service | grep kub`
-
+- List down all the service deployed as service in node `systemctl list-units --type=service | grep kube`
+- Decode Certificate: `openssl x509 -in <PATH> -text -noout`
 ### Deployment Strategy in kubernetes
   - Rolling Update
   - Recreate
 
 # Need further practice
-10. Practice Test - Node Affinity  
 14. Practice Test - Priority Classes
 16. Practice Test - Admission Controller
 17. Practice Test - Validating and Mutating Admission Controller
-23. Practice Test - Secrets (secret types)
-22. Practice Test - Env Variables (env vs envFrom)
-30. Practice Test - HPA
 34. Practice Test - Cluster Upgrade Process
 35. Practice Test - Backup and Restore Methods
-39. Practice Test - Role Based Access Controls
 44. Practice Test - Network Policies
 45. Practice Test - Custom Resource Definition
-46. Practice Test - Persistent Volume Claims
 47. Practice Test - Storage Class
+
+# Util
+
+- `kubectl auth can-i create secrets --as=system:serviceaccount:project-hamster:processor -n project-hamster`
+- `kubeadm token create --print-join-command`
+- `kubectl version`
+- `kubeadm version`
+
+# Commands
+- `ip route show`: shows routes and gateway
+- `openssl x509 -in /etc/kubernetes/pki/apiserver.crt  -text -noout`: decode certificate
+- `openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -enddate`: check end date
+
+- Vim Command
+  - `syntax on`
+  - `set number`
+  - `1,10d`
 
 # Reference
 - [Installing kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)

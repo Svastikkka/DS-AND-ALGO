@@ -29,6 +29,61 @@
 29. Create an `Ingress` called `ingsecret` with TLS enabled using secret `secret1`, host `foo.com/*` forwarding to `svc:8080`, and pathType `Prefix`.
 30. Create an `Ingress` called `ingdefault` with a default backend `defaultsvc:http`, TLS enabled using `secret1`, and an additional rule forwarding `foo.com/*` to `svc:8080`.
 
+31. Create a Pod with PVC and PV
+
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: testing-pv
+spec:
+  capacity:
+    storage: 1Gi
+  persistentVolumeReclaimPolicy: Retain
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: default
+  hostPath:
+    path: /mnt/data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: testing-pvc
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: default
+  accessModes:
+    - ReadWriteOnce
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: testing
+spec:
+  containers:
+  - name: testing
+    image: nginx
+    volumeMounts:
+    - name: testing
+      mountPath: /mnt/data
+  volumes:
+    - name: testing
+      persistentVolumeClaim:
+        claimName: testing-pvc
+
+
+
+      
+      
+
+      
+
+
+
+
 
 kubectl create ingress ingdefault --default-backend=defaultsvc:http  --rule="foo.com/*=svc:8080,tls=secret1"
 kubectl create ingress ingdefault --default-backend=defaultsvc:http  --rule="foo.com/*=svc:8080,tls=secret1"
