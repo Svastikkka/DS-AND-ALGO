@@ -271,21 +271,48 @@ Practice Tests - Cluster installation using kubeadm
   - Ingress & Egress
   - CoreDNS
   - Networking CNI
-  - Gateway
+  - Gateway CNI
+
 - Cluster Architecture, Installation and Configuration
   - Installation of each services
   - Log Path Of Each Services
   - Backup and restore
+
 - Helm
 - Kustomize
 - Crictl
 - Containerd
-- docker daemon
+- Docker
 
 - Troubleshooting
+  - jsonpath=[]
 
 # Reference
+
 - [Installing kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
 - [Upgrading kubeadm clusters](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/)
-- [2025 Real CKA Exam Questions - New Pattern](https://www.udemy.com/course/real-cka-exam-questions-certified-kubernetes-administrator/?couponCode=PMNVD2025)
-- [](https://www.youtube.com/watch?v=eGv6iPWQKyo)
+- [Persistent Volume & Persistent Volume Claim](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
+- [Assigning Pods to Nodes](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/)
+- [Troubleshooting Clusters](https://kubernetes.io/docs/tasks/debug/debug-cluster/)
+
+
+- [2025 CKA Exam Questions & Solutions UPDATE! | Full Walkthrough!](https://www.youtube.com/watch?v=eGv6iPWQKyo)
+- [CKAD/CKA Exam Hack: Navigating the Docs Like a Pro](https://www.youtube.com/watch?v=ffejoGo-rnE)
+
+PREVIOUD ASKED QUESTIONS
+
+- Manual Scaling
+- HELM TEMPLATE ARGO CD & HELM VALUES
+- NETWORK POLICY
+- COREDNS
+- PVC AND PV WITH HOST PATH
+- SIDE CAR
+- DAEMONSET
+- PRIORITY CLASSES
+- HPA
+- CLUSTER TROUBLESHOOTING
+- WORKER NODE IS DOWN TRY TO FIGURE OUT WHY
+- CLUSTER ROLE AND ROLEBINDING
+- CREATE DEPLOYMENTS AND SERVICES
+- NAMESPACE
+- INGRESS CONTROLLER TO GATEWAY CNI
