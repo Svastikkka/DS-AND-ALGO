@@ -231,6 +231,7 @@ Practice Tests - Cluster installation using kubeadm
 - What is --default-backend
 - List down all the service deployed as service in node `systemctl list-units --type=service | grep kube`
 - Decode Certificate: `openssl x509 -in <PATH> -text -noout`
+
 ### Deployment Strategy in kubernetes
   - Rolling Update
   - Recreate
@@ -239,11 +240,11 @@ Practice Tests - Cluster installation using kubeadm
 14. Practice Test - Priority Classes
 16. Practice Test - Admission Controller
 17. Practice Test - Validating and Mutating Admission Controller
-34. Practice Test - Cluster Upgrade Process
-35. Practice Test - Backup and Restore Methods
-44. Practice Test - Network Policies
-45. Practice Test - Custom Resource Definition
-47. Practice Test - Storage Class
+31. Practice Test - Cluster Upgrade Process
+32. Practice Test - Backup and Restore Methods
+41. Practice Test - Network Policies
+42. Practice Test - Custom Resource Definition
+44. Practice Test - Storage Class
 
 # Util
 
@@ -251,7 +252,7 @@ Practice Tests - Cluster installation using kubeadm
 - `kubeadm token create --print-join-command`
 - `kubectl version`
 - `kubeadm version`
-- 
+
 
 # Commands
 - `ip route show`: shows routes and gateway
@@ -263,7 +264,28 @@ Practice Tests - Cluster installation using kubeadm
   - `set number`
   - `1,10d`
 
+# Improvement Required
+
+- Services and Networking
+  - Network Policy
+  - Ingress & Egress
+  - CoreDNS
+  - Networking CNI
+  - Gateway
+- Cluster Architecture, Installation and Configuration
+  - Installation of each services
+  - Log Path Of Each Services
+  - Backup and restore
+- Helm
+- Kustomize
+- Crictl
+- Containerd
+- docker daemon
+
+- Troubleshooting
+
 # Reference
 - [Installing kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
+- [Upgrading kubeadm clusters](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/)
 - [2025 Real CKA Exam Questions - New Pattern](https://www.udemy.com/course/real-cka-exam-questions-certified-kubernetes-administrator/?couponCode=PMNVD2025)
 - [](https://www.youtube.com/watch?v=eGv6iPWQKyo)
