@@ -258,11 +258,37 @@ Practice Tests - Cluster installation using kubeadm
 - `ip route show`: shows routes and gateway
 - `openssl x509 -in /etc/kubernetes/pki/apiserver.crt  -text -noout`: decode certificate
 - `openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -enddate`: check end date
-
+- `ip link`:
+- `ip addr`: 
+- `ip addr add`:
+- `route & ip route`: To see route tables
+- `ip route add`: Add routes in linux
+- `nslookup <dns name>`
+- `dig`
 - Vim Command
   - `syntax on`
   - `set number`
   - `1,10d`
+
+# Networking
+- Switch: 
+  - HELPS TO CONNECT TWO SERVERS
+- ROUTER: 
+  - HELPS TO CONNECT TWO DIFF NETWORK
+  - ROUTERS HAS 2 or more IPs 
+- GATEWAY:
+- IP FORWARD
+  - File: /proc/sys/net/ipv4/ip_forward
+    - Default is 0:
+  - File: /etc/sysctl.conf
+    - net.ipv4.ip_forward=0 //Default
+- DNS: To manage all hosts ip's
+  - `/etc/resolv.conf`: 
+    - nameserver <ip>
+    - search mycompany.com
+  - `/etc/nsswitch.conf`: hosts: files(`/etc/hosts`) dns
+- Records Types
+
 
 # Improvement Required
 
@@ -294,11 +320,12 @@ Practice Tests - Cluster installation using kubeadm
 - [Persistent Volume & Persistent Volume Claim](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
 - [Assigning Pods to Nodes](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/)
 - [Troubleshooting Clusters](https://kubernetes.io/docs/tasks/debug/debug-cluster/)
-
+- [CoreDNS](https://kubernetes.io/docs/tasks/administer-cluster/coredns/)
 
 - [2025 CKA Exam Questions & Solutions UPDATE! | Full Walkthrough!](https://www.youtube.com/watch?v=eGv6iPWQKyo)
 - [CKAD/CKA Exam Hack: Navigating the Docs Like a Pro](https://www.youtube.com/watch?v=ffejoGo-rnE)
-
+- [Kubernetes CoreDNS](https://coredns.io/plugins/kubernetes/)
+- [Kubernetes DNS-Based Service Discovery](https://github.com/kubernetes/dns/blob/master/docs/specification.md)
 PREVIOUD ASKED QUESTIONS
 
 - Manual Scaling
