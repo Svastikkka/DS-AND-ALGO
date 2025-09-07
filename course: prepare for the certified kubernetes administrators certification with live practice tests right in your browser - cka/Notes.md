@@ -37,28 +37,30 @@
 29. Practice Test - Modifying CPU resources in VPA                                       DONE
 
 ### Cluster Maintenance
-33. Practice Test - OS Upgrades
-34. Practice Test - Cluster Upgrade Process
-35. Practice Test - Backup and Restore Methods
+30. Practice Test - OS Upgrades
+31. Practice Test - Cluster Upgrade Process
+32. Practice Test - Backup and Restore Methods
 
 ### Security
-36. Practice Test - View Certificate Details
-37. Practice Test - Certificates API
-38. Practice Test - KubeConfig
-39. Practice Test - Role Based Access Controls
-40. Practice Test - Cluster Roles
-41. Practice Test - Service Accounts
-42. Practice Test - Image Security
-43. Practice Test - Security Contexts
-44. Practice Test - Network Policies
-45. Practice Test - Custom Resource Definition
+33. Practice Test - View Certificate Details
+34. Practice Test - Certificates API
+35. Practice Test - KubeConfig
+36. Practice Test - Role Based Access Controls
+37. Practice Test - Cluster Roles
+38. Practice Test - Service Accounts
+39. Practice Test - Image Security
+40. Practice Test - Security Contexts
+41. Practice Test - Network Policies
+42. Practice Test - Custom Resource Definition
 
 ### Storage
-46. Practice Test - Persistent Volume Claims
-47. Practice Test - Storage Class
+43. Practice Test - Persistent Volume Claims
+44. Practice Test - Storage Class
 
 ### Network
-
+45. Practice Test - Explore Environment
+46. Practice Test - CNI
+47. 
 ### Install kubernetes "the kubeadm way"
 Practice Tests - Cluster installation using kubeadm
 
@@ -265,6 +267,7 @@ Practice Tests - Cluster installation using kubeadm
 - `ip route add`: Add routes in linux
 - `nslookup <dns name>`
 - `dig`
+- `netstat -tulnp | grep kube-scheduler`: Check which port kube schedular is listening
 - Vim Command
   - `syntax on`
   - `set number`
@@ -288,6 +291,34 @@ Practice Tests - Cluster installation using kubeadm
     - search mycompany.com
   - `/etc/nsswitch.conf`: hosts: files(`/etc/hosts`) dns
 - Records Types
+- Network Namespaces
+  - To create network namespace: `ip netns add red` or `ip netns add blue`
+  - To list: `ip netns`
+  - To list: `ip link`
+  - To list inside the namespace: `ip netns exec red ip link` or `ip -n red link`
+  - To see arp table: `arp`
+  - To connect two network interfaces: 
+    - `ip link veth-red type veth peer name veth-blue`
+    - `ip link set veth-red netns red` // attach with red interface
+    - `ip link set veth-blue netns blue` // attach with blue interface
+    - `ip -n red addr add 192.168.15.1 dev veth-red` // give ip 
+    - `ip -n blue addr add 192.168.15.2 dev veth-blue` // give ip 
+    - `ip -n red link set veth-red up` 
+    - `ip -n blue link set veth-blue up`
+    - Try to ping from red to blue: `ip netns exec red ping 192.168.15.2`
+    - Try to arp table: `ip netns exec red arp` // red is now able to identify blue and it is same for blue as well
+    - To delete link pair b/w red and blue: `ip -n red link del veth-red`
+  - Virtual Switch
+    - Linux Bridge & Open vSwitch
+    - Establish connectivity in between network interfaces and external system
+      - System A[Network namespace (v-net-0) -> eth0 (Ethernet)] -> Sytem B(External System)
+      - We need to update route
+      - We need to update NAT iptable
+  - Docker Networks
+    - None: `docker run --network=none nginx`
+    - Host: `docker run --network=host nginx`
+    - Bridge:
+  - Container Network Interface (CNI)
 
 
 # Improvement Required
@@ -321,11 +352,14 @@ Practice Tests - Cluster installation using kubeadm
 - [Assigning Pods to Nodes](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/)
 - [Troubleshooting Clusters](https://kubernetes.io/docs/tasks/debug/debug-cluster/)
 - [CoreDNS](https://kubernetes.io/docs/tasks/administer-cluster/coredns/)
-
+- [Ports and Protocols](https://kubernetes.io/docs/reference/networking/ports-and-protocols/)
 - [2025 CKA Exam Questions & Solutions UPDATE! | Full Walkthrough!](https://www.youtube.com/watch?v=eGv6iPWQKyo)
 - [CKAD/CKA Exam Hack: Navigating the Docs Like a Pro](https://www.youtube.com/watch?v=ffejoGo-rnE)
 - [Kubernetes CoreDNS](https://coredns.io/plugins/kubernetes/)
 - [Kubernetes DNS-Based Service Discovery](https://github.com/kubernetes/dns/blob/master/docs/specification.md)
+- [Installing Addons](https://kubernetes.io/docs/concepts/cluster-administration/addons/)
+- [Cluster Networking](https://kubernetes.io/docs/concepts/cluster-administration/networking/#how-to-implement-the-kubernetes-network-model)
+
 PREVIOUD ASKED QUESTIONS
 
 - Manual Scaling
