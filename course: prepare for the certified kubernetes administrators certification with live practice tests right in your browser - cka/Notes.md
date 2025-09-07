@@ -37,35 +37,73 @@
 29. Practice Test - Modifying CPU resources in VPA                                       DONE
 
 ### Cluster Maintenance
-30. Practice Test - OS Upgrades
-31. Practice Test - Cluster Upgrade Process
-32. Practice Test - Backup and Restore Methods
+30. Practice Test - OS Upgrades                                                          DONE
+31. Practice Test - Cluster Upgrade Process                                              DONE
+32. Practice Test - Backup and Restore Methods                                           DONE
 
 ### Security
-33. Practice Test - View Certificate Details
-34. Practice Test - Certificates API
-35. Practice Test - KubeConfig
-36. Practice Test - Role Based Access Controls
-37. Practice Test - Cluster Roles
-38. Practice Test - Service Accounts
-39. Practice Test - Image Security
-40. Practice Test - Security Contexts
-41. Practice Test - Network Policies
-42. Practice Test - Custom Resource Definition
+33. Practice Test - View Certificate Details                                             DONE
+34. Practice Test - Certificates API                                                     DONE
+35. Practice Test - KubeConfig                                                           DONE
+36. Practice Test - Role Based Access Controls                                           DONE
+37. Practice Test - Cluster Roles                                                        DONE
+38. Practice Test - Service Accounts                                                     DONE
+39. Practice Test - Image Security                                                       DONE
+40. Practice Test - Security Contexts                                                    DONE
+41. Practice Test - Network Policies                                                     UNDONE
+42. Practice Test - Custom Resource Definition                                           UNDONE
 
 ### Storage
-43. Practice Test - Persistent Volume Claims
-44. Practice Test - Storage Class
+43. Practice Test - Persistent Volume Claims                                             DONE
+44. Practice Test - Storage Class                                                        DONE
 
 ### Network
-45. Practice Test - Explore Environment
-46. Practice Test - CNI
-47. 
-### Install kubernetes "the kubeadm way"
-Practice Tests - Cluster installation using kubeadm
+45. Practice Test - Explore Environment                                                  DONE
+46. Practice Test - CNI                                                                  DONE
+47. Practice Test - Networking CNIs                                                      DONE
+48. Practice Test - Service Networking
+49. Practice Test - CoreDNS in Kubernetes
+50. Practice Test - CKA - Ingress Networking - 1
+51. Practice Test - CKA - Ingress Networking - 2
+52. Practice Test - Gateway API
 
+### Install kubernetes "the kubeadm way"
+53. Practice Tests - Cluster installation using kubeadm
+
+
+# Architecture and their configuration
+- controlplane
+  - etcd
+    - config PATH:
+    - log PATH:
+  - coreDNS
+    - config PATH:
+    - log PATH:  
+  - kubelet
+    - config PATH:
+    - log PATH: 
+  - kube-apiserver
+    - config PATH:
+    - log PATH: 
+  - kube-proxy
+    - Ways kube proxy manage service ip's
+      - iptables
+      - userspace
+      - ipvs
+    - config PATH:
+    - log PATH: 
+  - kube-schedular
+    - config PATH:
+    - log PATH: 
+  - kube controller
+    - config PATH:
+    - log PATH: 
+- worker node
+  - kubelet
+    - config PATH:
+    - log PATH:
+  - 
 ### Ad Hoc Commands
-  
 
 - kubectl create
   - Available Commands:
@@ -211,26 +249,26 @@ Practice Tests - Cluster installation using kubeadm
 
 
 - helm 
-  - helm search repo <keyword>
-  - helm repo list
-  - helm install minio 
-  - helm install my-nginx bitnami/nginx 
-  - helm repo add bitnami https://charts.bitnami.com/bitnami
+  - `helm search repo <keyword>`
+  - `helm repo list`
+  - `helm install minio `
+  - `helm install my-nginx bitnami/nginx`
+  - `helm repo add bitnami https://charts.bitnami.com/bitnami`
 
 - kustomize
-  - kubectl kustomiz <DIR>
+  - `kubectl kustomiz <DIR>`
 
 
-- What is --aggregation-rule
+- What is `--aggregation-rule`
   - Used when creating a ClusterRole that is automatically built (aggregated) from other ClusterRoles.
   - Instead of manually listing verbs/resources, you add a label selector.
   - Any ClusterRole that matches this selector will have its rules merged into your role.
 
-- What is --non-resource-url
+- What is `--non-resource-url`
   - Grants permissions to access API endpoints that are not tied to resources.
   - These are endpoints like /healthz, /metrics, /logs/*, etc.
   - Useful when you want to give monitoring or debugging access without touching resources.
-- What is --default-backend
+- What is `--default-backend`
 - List down all the service deployed as service in node `systemctl list-units --type=service | grep kube`
 - Decode Certificate: `openssl x509 -in <PATH> -text -noout`
 
@@ -238,15 +276,6 @@ Practice Tests - Cluster installation using kubeadm
   - Rolling Update
   - Recreate
 
-# Need further practice
-14. Practice Test - Priority Classes
-16. Practice Test - Admission Controller
-17. Practice Test - Validating and Mutating Admission Controller
-31. Practice Test - Cluster Upgrade Process
-32. Practice Test - Backup and Restore Methods
-41. Practice Test - Network Policies
-42. Practice Test - Custom Resource Definition
-44. Practice Test - Storage Class
 
 # Util
 
@@ -268,6 +297,7 @@ Practice Tests - Cluster installation using kubeadm
 - `nslookup <dns name>`
 - `dig`
 - `netstat -tulnp | grep kube-scheduler`: Check which port kube schedular is listening
+- `netstat -tulnp | grep kube`
 - Vim Command
   - `syntax on`
   - `set number`
@@ -319,6 +349,10 @@ Practice Tests - Cluster installation using kubeadm
     - Host: `docker run --network=host nginx`
     - Bridge:
   - Container Network Interface (CNI)
+    - cni config PATH: 
+      - `/etc/cni/net.d`
+      - `/opt/cni/bin`
+    - weave works (cni plugin tool)
 
 
 # Improvement Required
