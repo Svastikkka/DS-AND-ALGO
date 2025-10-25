@@ -1,0 +1,16 @@
+resources:
+  - ../../base
+
+namePrefix: prod-
+
+commonLabels:
+  environment: prod
+
+patches:
+  - patch: |
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: myapp
+      spec:
+        replicas: 5
