@@ -21,7 +21,7 @@ Solve this question on: `ssh cka7968`
 - Install the MinIO Operator using Helm in Namespace `minio`. Then configure and create the Tenant CRD:
   - Create Namespace `minio`
   - Install Helm chart `minio/operator` into the new Namespace. The Helm Release should be called `minio-operator`
-  - Update the Tenant resource in `/opt/course/2/minio-tenant.yaml` to include `enableSFTP: true` under features
+  - Update the Tenant resource in `/opt/course/2/minio-tenant.yaml` to include `enableSFTP: true` under `features`
   - Create the Tenant resource from `/opt/course/2/minio-tenant.yaml`
 
 ```bash
@@ -39,7 +39,7 @@ kubectl get tenant
 
 Question 3 | Scale down StatefulSet
 
-Solve this question on: ssh cka3962
+Solve this question on: `ssh cka3962`
 - There are two Pods named `o3db-*` in Namespace `project-h800`. The Project H800 management asked you to scale these down to one replica to save resources.
 ```bash
 kubectl scale sts o3db --replicas=1 -n project-h800
@@ -75,7 +75,7 @@ kubectl get po -n kube-system -o jsonpath='{range .items[*]}{.metadata.name}{" =
 
 Question 5 | Kustomize configure HPA Autoscaler
 
-Solve this question on: ssh cka5774
+Solve this question on: `ssh cka5774`
 - Previously the application `api-gateway` used some external autoscaler which should now be replaced with a HorizontalPodAutoscaler (HPA). The application has been deployed to Namespaces `api-gateway-staging` and `api-gateway-prod` like this:
 
 ```bash
@@ -214,7 +214,7 @@ Reference: [Configure a Pod to Use a PersistentVolume for Storage](https://kuber
 
 Question 7 | Node and Pod Resource Usage
 
-Solve this question on: ssh cka5774
+Solve this question on: `ssh cka5774`
 
 The metrics-server has been installed in the cluster. Write two bash scripts which use kubectl:
 1. Script /opt/course/7/node.sh should show resource usage of nodes
@@ -230,9 +230,9 @@ kubectl top po --containers=true
 
 Question 8 | Update Kubernetes Version and join cluster
 
-Solve this question on: ssh cka3962
+Solve this question on: `ssh cka3962`
 
-Your coworker notified you that node cka3962-node1 is running an older Kubernetes version and is not even part of the cluster yet.
+Your coworker notified you that node `cka3962-node1` is running an older Kubernetes version and is not even part of the cluster yet.
 
 1. Update the node's Kubernetes to the exact version of the controlplane
 2. Add the node to the cluster using kubeadm
@@ -351,7 +351,9 @@ curl --cacert ${CACERT} https://kubernetes.default/api/v1/secrets -H "Authorizat
 
 - Step 6: Write down all secrets in `/opt/course/9/result.json`
 
-Reference: [configure-service-account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)
+Reference: 
+  - [Accessing the Kubernetes API from a Pod](https://kubernetes.io/docs/tasks/run-application/access-api-from-pod/)
+  - [configure-service-account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)
 
 
 Question 10 | RBAC ServiceAccount Role RoleBinding
@@ -416,7 +418,7 @@ Reference: [Daemonset](https://kubernetes.io/docs/concepts/workloads/controllers
 
 Question 12 | Deployment on all Nodes
 
-Solve this question on: ssh cka2556
+Solve this question on: `ssh cka2556`
 
 Implement the following in Namespace project-tiger:
 
@@ -624,13 +626,13 @@ Reference: [Gateway](https://kubernetes.io/docs/concepts/services-networking/gat
 
 Question 14 | Check how long certificates are valid
 
-Solve this question on: ssh cka9412
+Solve this question on: `ssh cka9412`
 
  
 
 Perform some tasks on cluster certificates:
 
-1. Check how long the kube-apiserver server certificate is valid using `openssl` or `cfssl`. Write the expiration date into `/opt/course/14/expiration`. Run the kubeadm command to list the expiration dates and confirm both methods show the same one
+1. Check how long the `kube-apiserver` server certificate is valid using `openssl` or `cfssl`. Write the expiration date into `/opt/course/14/expiration`. Run the kubeadm command to list the expiration dates and confirm both methods show the same one
 2. Write the kubeadm command that would renew the kube-apiserver certificate into `/opt/course/14/kubeadm-renew-certs.sh`
 
 1. How long the kube-apiserver server certificate is valid using `openssl`
@@ -659,7 +661,7 @@ kubeadm certs renew apiserver
 
 Question 15 | NetworkPolicy
 
-Solve this question on: ssh cka7968
+Solve this question on: `ssh cka7968`
 
 There was a security incident where an intruder was able to access the whole cluster from a single hacked backend Pod.
 
@@ -701,6 +703,16 @@ Reference: [Network Policies](https://kubernetes.io/docs/concepts/services-netwo
 
 Question 16 | Update CoreDNS Configuration
 
+Solve this question on: `ssh cka5774`
+
+The CoreDNS configuration in the cluster needs to be updated:
+
+1. Make a backup of the existing configuration Yaml and store it at `/opt/course/16/coredns_backup.yaml`. You should be able to fast recover from the backup
+
+2. Update the CoreDNS configuration in the cluster so that DNS resolution for `SERVICE.NAMESPACE.custom-domain` will work exactly like and in addition to `SERVICE.NAMESPACE.cluster.local`
+
+Test your configuration for example from a Pod with busybox:1 image. These commands should result in an IP address:
+
 - Step 1: Get config map
 ```bash 
 kubectl get cm coredns -n kube-system -o yaml > coredns.yaml
@@ -716,7 +728,7 @@ data:
            lameduck 5s
         }
         ready
-        kubernetes custom-domain cluster.local in-addr.arpa ip6.arpa {
+        kubernetes custom-domain cluster.local in-addr.arpa ip6.arpa { # I added custom-domain which will act similar like cluster.local
            pods insecure
            fallthrough in-addr.arpa ip6.arpa
            ttl 30
@@ -741,7 +753,7 @@ Question 17 | Find Container of Pod and check info
 
 Solve this question on: ssh cka2556
 
-In Namespace project-tiger create a Pod named `tigers-reunite` of image `httpd:2-alpine` with labels `pod=container` and `container=pod`. Find out on which node the Pod is scheduled. Ssh into that node and find the containerd container belonging to that Pod.
+In Namespace `project-tiger` create a Pod named `tigers-reunite` of image `httpd:2-alpine` with labels `pod=container` and `container=pod`. Find out on which node the Pod is scheduled. Ssh into that node and find the containerd container belonging to that Pod.
 
 Using command crictl:
 

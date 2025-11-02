@@ -50,8 +50,8 @@
 38. Practice Test - Service Accounts                                                     DONE
 39. Practice Test - Image Security                                                       DONE
 40. Practice Test - Security Contexts                                                    DONE
-41. Practice Test - Network Policies                                                     UNDONE
-42. Practice Test - Custom Resource Definition                                           UNDONE
+41. Practice Test - Network Policies                                                     DONE
+42. Practice Test - Custom Resource Definition                                           DONE
 
 ### Storage
 43. Practice Test - Persistent Volume Claims                                             DONE
@@ -61,14 +61,14 @@
 45. Practice Test - Explore Environment                                                  DONE
 46. Practice Test - CNI                                                                  DONE
 47. Practice Test - Networking CNIs                                                      DONE
-48. Practice Test - Service Networking
-49. Practice Test - CoreDNS in Kubernetes
-50. Practice Test - CKA - Ingress Networking - 1
-51. Practice Test - CKA - Ingress Networking - 2
-52. Practice Test - Gateway API
+48. Practice Test - Service Networking                                                   DONE
+49. Practice Test - CoreDNS in Kubernetes                                                DONE
+50. Practice Test - CKA - Ingress Networking - 1                                         DONE
+51. Practice Test - CKA - Ingress Networking - 2                                         DONE
+52. Practice Test - Gateway API                                                          DONE
 
 ### Install kubernetes "the kubeadm way"
-53. Practice Tests - Cluster installation using kubeadm
+53. Practice Tests - Cluster installation using kubeadm                                  DONE
 
 
 # Architecture and their configuration
@@ -249,14 +249,20 @@
 
 
 - helm 
-  - `helm search repo <keyword>`
-  - `helm repo list`
-  - `helm install minio `
-  - `helm install my-nginx bitnami/nginx`
-  - `helm repo add bitnami https://charts.bitnami.com/bitnami`
+  - `helm search repo <keyword>` # To Search for specific repo
+  - `helm repo list` # List down every repo
+  - `helm install minio ` # Install minio
+  - `helm install my-nginx bitnami/nginx` # Install nginx
+  - `helm repo add bitnami https://charts.bitnami.com/bitnami` # Add repo
+  - `helm search repo`
+  - `helm pull ingress-nginx/ingress-nginx --untar` # Download repo locally
+  - `helm template ingress-nginx ingress-nginx/ingress-nginx --values ingress-nginx/values.yaml` # Check output template before applying
+  - `helm show values ingress-nginx/ingress-nginx` # Show values
 
 - kustomize
   - `kubectl kustomiz <DIR>`
+  - `kubectl apply -k <DIR>`
+  - `kubectl delete -k <DIR>`
 
 
 - What is `--aggregation-rule`
@@ -394,20 +400,20 @@
 - [Installing Addons](https://kubernetes.io/docs/concepts/cluster-administration/addons/)
 - [Cluster Networking](https://kubernetes.io/docs/concepts/cluster-administration/networking/#how-to-implement-the-kubernetes-network-model)
 
-PREVIOUD ASKED QUESTIONS
+# PREVIOUSLY ASKED QUESTIONS
 
-- Manual Scaling
-- HELM TEMPLATE ARGO CD & HELM VALUES
-- NETWORK POLICY
-- COREDNS
-- PVC AND PV WITH HOST PATH
-- SIDE CAR
-- DAEMONSET
-- PRIORITY CLASSES
-- HPA
-- CLUSTER TROUBLESHOOTING
-- WORKER NODE IS DOWN TRY TO FIGURE OUT WHY
-- CLUSTER ROLE AND ROLEBINDING
-- CREATE DEPLOYMENTS AND SERVICES
-- NAMESPACE
-- INGRESS CONTROLLER TO GATEWAY CNI
+- Manual Scaling                                -> DONE
+- HELM TEMPLATE ARGO CD & HELM VALUES           -> DONE
+- NETWORK POLICY                                -> DONE
+- COREDNS                                       -> DONE
+- PVC AND PV WITH HOST PATH                     -> DONE
+- SIDE CAR                                      -> DONE
+- DAEMONSET                                     -> DONE
+- PRIORITY CLASSES                              -> DONE
+- HPA                                           -> DONE
+- CLUSTER TROUBLESHOOTING                       -> DONE
+- WORKER NODE IS DOWN TRY TO FIGURE OUT WHY     -> DONE
+- CLUSTER ROLE AND ROLEBINDING                  -> DONE
+- CREATE DEPLOYMENTS AND SERVICES               -> DONE
+- NAMESPACE                                     -> DONE
+- INGRESS CONTROLLER TO GATEWAY CNI             -> DONE

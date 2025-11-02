@@ -53,6 +53,6 @@
 ├── 51. Practice Test - CKA - Ingress Networking - 2.md
 ├── 52. Practice Test - Gateway API.md
 ├── 53. Practice Test - Installating Kubernetes.md
-├── Notes.md
+├── [Notes.md](./Notes.md)
 └── ReadME.md
 ```
