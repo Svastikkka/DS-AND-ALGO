@@ -417,3 +417,4 @@
 - CREATE DEPLOYMENTS AND SERVICES               -> DONE
 - NAMESPACE                                     -> DONE
 - INGRESS CONTROLLER TO GATEWAY CNI             -> DONE
+- INIT CONTAINER                                -> DONE

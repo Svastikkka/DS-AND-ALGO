@@ -1,6 +1,6 @@
 Question 1 | DNS / FQDN / Headless Service
  
-Solve this question on: ssh cka6016
+Solve this question on: `ssh cka6016`
 
 The Deployment controller in Namespace lima-control communicates with various cluster internal endpoints by using their DNS FQDN values.
 
@@ -9,7 +9,7 @@ Update the ConfigMap used by the Deployment with the correct FQDN values for:
 - DNS_1: Service `kubernetes` in Namespace `default`
 - DNS_2: Headless Service `department` in Namespace `lima-workload`
 - DNS_3: Pod `section100` in Namespace `lima-workload`. It should work even if the Pod IP changes
-- DNS_4: A Pod with IP 1.2.3.4 in Namespace kube-system
+- DNS_4: A Pod with IP `1.2.3.4` in Namespace `kube-system`
 
 Ensure the Deployment works with the updated values.
 
@@ -54,7 +54,7 @@ spec:
   - image: nginx:1-alpine
     name: my-static-pod
     ports:
-      containerPort: 80
+      - containerPort: 80
     resources:
       requests:
         cpu: 10m
@@ -64,7 +64,7 @@ spec:
 status: {}
 ```
 ```bash
-kubectl expose pod my-static-pod --name static-pod-service --port=80 --target-port=80 --type=nodePort --dry-run=client -o yaml
+kubectl expose pod my-static-pod --name static-pod-service --port=80 --target-port=80 --type=NodePort --dry-run=client -o yaml
 ```
 
 Question 3 | Kubelet client/server cert info
@@ -108,7 +108,7 @@ X509v3 Extended Key Usage: TLS Web Server Authentication
 Question 4 | Pod Ready if Service is reachable
 
 
-Solve this question on: ssh cka3200
+Solve this question on: `ssh cka3200`
 
 Do the following in Namespace default:
 
@@ -176,7 +176,7 @@ status: {}
 Question 5 | Kubectl sorting
  
 
-Solve this question on: ssh cka8448
+Solve this question on: `ssh cka8448`
 
 Create two bash script files which use kubectl sorting to:
 
@@ -195,7 +195,7 @@ Solve this question on: `ssh cka1024`
 
 1. There seems to be an issue with the kubelet on controlplane node `cka1024`, it's not running.
 2. Fix the kubelet and confirm that the node is available in Ready state.
-3. Create a Pod called success in default Namespace of image nginx:1-alpine.
+3. Create a Pod called `success` in default Namespace of image `nginx:1-alpine`.
 
 ```bash
 # Few things we do to troubleshoot
@@ -418,7 +418,7 @@ spec:
 
 Question 11 | Create Secret and mount into Pod
 
-Create Namespace secret and implement the following in it:
+Create Namespace `secret` and implement the following in it:
 
 Create Pod `secret-pod` with image `busybox:1`. It should be kept running by executing `sleep 1d` or something similar
 
@@ -474,7 +474,7 @@ status: {}
 Question 12 | Schedule Pod on Controlplane Nodes
  
 
-Solve this question on: ssh cka5248
+Solve this question on: `ssh cka5248`
 
 Create a Pod of image `httpd:2-alpine` in Namespace default.
 
@@ -487,8 +487,173 @@ Do not add new labels to any nodes.
 
 We can use `nodeaffinity` or `nodeSelector`
 ```bash
-kubectl 
+kubectl run pod1 --image=httpd:2-alpine --dry-run=client -oyaml
 ```
 
 ```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: pod1
+  name: pod1
+spec:
+  nodeSelector:
+    node-role.kubernetes.io/control-plane: ""
+  containers:
+  - image: httpd:2-alpine
+    name: pod1-container
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+```
+
+Question 13 | Multi Containers and Pod shared Volume
+ 
+
+Solve this question on: `ssh cka3200`
+
+Create a Pod with multiple containers named `multi-container-playground` in Namespace `default`:
+
+It should have a volume attached and mounted into each container. The volume shouldn't be persisted or shared with other Pods
+
+Container `c1` with image `nginx:1-alpine` should have the name of the node where its Pod is running on available as environment variable `MY_NODE_NAME`
+
+Container `c2` with image `busybox:1` should write the output of the date command every second in the shared volume into file date.log. You can use `while true; do date >> /your/vol/path/date.log; sleep 1; done` for this.
+
+Container `c3` with image `busybox:1` should constantly write the content of file date.log from the shared volume to stdout. You can use `tail -f /your/vol/path/date.log` for this.
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: multi-container-playground
+  name: multi-container-playground
+spec:
+  volumes:
+  - name: cache-volume
+    emptyDir: {}
+  containers:
+  - image: nginx:1-alpine
+    name: c1
+    resources: {}
+    env:
+      - name: MY_NODE_NAME
+        valueFrom:
+          fieldRef:
+            fieldPath: spec.nodeName
+    volumeMounts:
+    - mountPath: /your/vol/path
+      name: cache-volume
+  - image: busybox:1
+    name: c2
+    resources: {}
+    command: ["sh", "-c", "while true; do date >> /your/vol/path/date.log; sleep 1; done"]
+    volumeMounts:
+    - mountPath: /your/vol/path
+      name: cache-volume
+  - image: busybox:1
+    name: c3
+    resources: {}
+    command: ["sh", "-c", "tail -f /your/vol/path/date.log"]
+    volumeMounts:
+    - mountPath: /your/vol/path
+      name: cache-volume
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+```
+
+Question 14 | Find out Cluster Information
+ 
+
+Solve this question on: `ssh cka8448`
+
+You're ask to find out following information about the cluster:
+
+- How many controlplane nodes are available?
+- How many worker nodes (non controlplane nodes) are available?
+- What is the Service CIDR?
+- Which Networking (or CNI Plugin) is configured and where is its config file?
+- Which suffix will static pods have that run on `cka8448`?
+
+Write your answers into file /opt/course/14/cluster-info, structured like this:
+
+```txt
+# /opt/course/14/cluster-info
+1: 1
+2: 0
+3: 10.96.0.0/12
+4: weave
+5: -cka8448
+```
+
+Question 15 | Cluster Event Logging
+ 
+
+Solve this question on: `ssh cka6016`
+
+Write a kubectl command into `/opt/course/15/cluster_events.sh` which shows the latest events in the whole cluster, ordered by time (`metadata.creationTimestamp`)
+
+Delete the kube-proxy Pod and write the events this caused into `/opt/course/15/pod_kill.log` on `cka6016`
+
+Manually kill the containerd container of the `kube-proxy` Pod and write the events into `/opt/course/15/container_kill.log`
+
+```bash
+k get events -A --sort-by="metadata.creationTimestamp"
+k delete po kube-proxy-74sjd -n kube-system
+k get events -A --sort-by="metadata.creationTimestamp" > /opt/course/15/pod_kill.log
+
+crictl ps | grep kube-proxy
+crictl rm --force kube-proxy-* 
+
+k get events -A --sort-by="metadata.creationTimestamp" > /opt/course/15/container_kill.log
+```
+
+
+Question 16 | Namespaces and Api Resources
+ 
+
+Solve this question on: ssh cka3200
+
+- Write the names of all namespaced Kubernetes resources (like Pod, Secret, ConfigMap...) into `/opt/course/16/resources.txt`.
+- Find the `project-*` Namespace with the highest number of Roles defined in it and write its name and amount of Roles into `/opt/course/16/crowded-namespace.txt`.
+
+```bash
+k api-resources --namespaced=true -oname > /opt/course/16/resources.txt
+
+
+k get roles -n project-1 --no-headers | wc -l
+k get roles -n project-2 --no-headers | wc -l
+```
+
+Question 17 | Operator, CRDs, RBAC, Kustomize
+ 
+
+Solve this question on: ssh cka6016
+
+There is Kustomize config available at `/opt/course/17/operator`. It installs an operator which works with different CRDs. It has been deployed like this:
+
+```bash
+kubectl kustomize /opt/course/17/operator/prod | kubectl apply -f -
+```
+
+Perform the following changes in the Kustomize base config:
+
+- The operator needs to list certain CRDs. Check the logs to find out which ones and adjust the permissions for Role operator-role
+- Add a new Student resource called student4 with any name and description
+- Deploy your Kustomize config changes to prod.
+
+```bash
+cd /opt/course/17/operator
+k kustomize base
+k kustomize prod
+
+k  get pod -n operator-prod
+k logs -f operator-7f4f58d4d9-v6ftw -n operator-prod
+k -n operator-prod create role operator-role --verb list --resource student --resource class -oyaml --dry-run=client # PUT THIS IN BASE
 ```
